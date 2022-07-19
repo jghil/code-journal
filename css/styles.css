@@ -1,7 +1,17 @@
 body {
-  font-family: Roboto, sans-serif;
+  font-family:
+    "Lucida Sans",
+    "Lucida Sans Regular",
+    "Lucida Grande",
+    "Lucida Sans Unicode",
+    Geneva,
+    sans-serif;
   line-height: 2;
   background-color: rgb(243, 243, 243);
+}
+
+header {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, sans-serif;
 }
 
 label {
@@ -14,6 +24,10 @@ label {
   color: white;
 }
 
+.smaller-font {
+  font-size: 0.8rem;
+}
+
 input,
 textarea {
   border-radius: 3px;
@@ -22,7 +36,13 @@ textarea {
   padding: 5px;
   width: 100%;
   resize: none;
-  font-family: Roboto, sans-serif;
+  font-family:
+    "Lucida Sans",
+    "Lucida Sans Regular",
+    "Lucida Grande",
+    "Lucida Sans Unicode",
+    Geneva,
+    sans-serif;
 }
 
 textarea:focus,
@@ -31,17 +51,11 @@ input:focus {
   border: solid 3px rgb(75, 35, 115);
 }
 
-.button {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
 button:hover {
   cursor: pointer;
 }
 
-.save-button {
+.button {
   background-color: rgb(75, 35, 115);
   color: white;
   padding: 10px 15px;
