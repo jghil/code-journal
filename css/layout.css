@@ -8,9 +8,22 @@
   padding: 0 1.5rem;
 }
 
+.navbar {
+  max-width: 900px;
+}
+
 .row {
   display: flex;
   flex-wrap: wrap;
+}
+
+.images {
+  border-radius: 5px;
+  width: 100%;
+}
+
+.wrapped {
+  margin-top: 1rem;
 }
 
 .column-full,
