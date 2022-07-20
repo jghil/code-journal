@@ -7,7 +7,7 @@ $newPhotoPreview.addEventListener('input', function (e) {
 });
 
 $entryForm.addEventListener('submit', function (e) {
-  event.preventDefault();
+  e.preventDefault();
   var newObject = {};
   newObject.entryId = data.nextEntryId++;
   newObject.title = $entryForm.elements.title.value;
@@ -64,27 +64,30 @@ document.addEventListener('DOMContentLoaded', function (e) {
 });
 
 var $entriesButton = document.querySelector('.navbar-button');
-var $hideNewEntry = document.querySelector('#entry-form', '.hidden');
-var $hideEntries = document.querySelector('#entries', '.hidden');
+var $hideNewEntry = document.querySelector('.entry-form', '.hidden');
+var $hideEntries = document.querySelector('.entries', '.hidden');
 var $newButton = document.querySelector('.a-button');
-var $showNewEntry = document.querySelector('#entry-form');
-var $showEntries = document.querySelector('#entries');
+var $showNewEntry = document.querySelector('.entry-form');
+var $showEntries = document.querySelector('.entries');
 var $saveButton = document.querySelector('#entry-form');
 
 $entriesButton.addEventListener('click', function (e) {
-  event.preventDefault();
-  $hideEntries.className = '#entries';
-  $showNewEntry.className = '#entry-form hidden';
+  e.preventDefault();
+  $hideEntries.className = 'entries';
+  $showNewEntry.className = 'entry-form hidden';
 });
 
 $newButton.addEventListener('click', function (e) {
-  event.preventDefault();
-  $hideNewEntry.className = '#entry-form';
-  $showEntries.className = '#entries hidden';
+  e.preventDefault();
+  $hideNewEntry.className = 'entry-form';
+  $showEntries.className = 'entries hidden';
 });
 
 $saveButton.addEventListener('submit', function (e) {
-  event.preventDefault();
-  $hideEntries.className = '#entries';
-  $showNewEntry.className = '#entry-form hidden';
+  e.preventDefault();
+  var ulList = document.querySelector('ul');
+  var newJournalEntry = renderObject(data.entries[0]);
+  ulList.prepend(newJournalEntry);
+  $hideEntries.className = 'entries';
+  $showNewEntry.className = 'hidden';
 });
