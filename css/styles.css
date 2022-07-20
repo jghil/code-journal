@@ -28,6 +28,10 @@ label {
   font-size: 0.8rem;
 }
 
+.no-margin {
+  margin: 0;
+}
+
 input,
 textarea {
   border-radius: 3px;

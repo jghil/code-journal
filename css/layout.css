@@ -55,6 +55,16 @@
   width: 100%;
 }
 
+.no-bullets {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.li-space {
+  margin: 0 0 2rem;
+}
+
 @media screen and (min-width: 768px) {
   .container,
   .navbar {
