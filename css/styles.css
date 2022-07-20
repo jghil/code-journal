@@ -6,7 +6,7 @@ body {
     "Lucida Sans Unicode",
     Geneva,
     sans-serif;
-  line-height: 2;
+  line-height: 1.6;
   background-color: rgb(243, 243, 243);
 }
 
@@ -55,7 +55,8 @@ input:focus {
   border: solid 3px rgb(75, 35, 115);
 }
 
-button:hover {
+button:hover,
+a:hover {
   cursor: pointer;
 }
 
@@ -63,7 +64,23 @@ button:hover {
   background-color: rgb(75, 35, 115);
   color: white;
   padding: 10px 15px;
-  border-radius: 3px;
+  border-radius: 5px;
   border-style: none;
   margin-bottom: 1rem;
+  text-decoration: none;
+}
+
+.a-button {
+  background-color: rgb(75, 35, 115);
+  color: white;
+  padding: 5px 15px;
+  border-radius: 5px;
+  border-style: none;
+  margin-bottom: 1rem;
+  text-decoration: none;
+}
+
+.navbar-button {
+  color: white;
+  text-decoration: none;
 }

@@ -62,3 +62,29 @@ document.addEventListener('DOMContentLoaded', function (e) {
     ulList.appendChild(journalEntry);
   }
 });
+
+var $entriesButton = document.querySelector('.navbar-button');
+var $hideNewEntry = document.querySelector('#entry-form', '.hidden');
+var $hideEntries = document.querySelector('#entries', '.hidden');
+var $newButton = document.querySelector('.a-button');
+var $showNewEntry = document.querySelector('#entry-form');
+var $showEntries = document.querySelector('#entries');
+var $saveButton = document.querySelector('#entry-form');
+
+$entriesButton.addEventListener('click', function (e) {
+  event.preventDefault();
+  $hideEntries.className = '#entries';
+  $showNewEntry.className = '#entry-form hidden';
+});
+
+$newButton.addEventListener('click', function (e) {
+  event.preventDefault();
+  $hideNewEntry.className = '#entry-form';
+  $showEntries.className = '#entries hidden';
+});
+
+$saveButton.addEventListener('submit', function (e) {
+  event.preventDefault();
+  $hideEntries.className = '#entries';
+  $showNewEntry.className = '#entry-form hidden';
+});
