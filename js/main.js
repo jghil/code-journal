@@ -16,6 +16,10 @@ $entryForm.addEventListener('submit', function (e) {
   document.getElementById('entry-form').reset();
   $photoUrlPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
   data.entries.unshift(newObject);
+  var ulList = document.querySelector('ul');
+  var newJournalEntry = renderObject(data.entries[0]);
+  ulList.prepend(newJournalEntry);
+  viewSwap('entries');
 });
 
 function renderObject(data) {
@@ -55,63 +59,40 @@ function renderObject(data) {
   return liWrapper;
 }
 
-document.addEventListener('DOMContentLoaded', function (e) {
-  var ulList = document.querySelector('ul');
-  for (var i = 0; i < data.entries.length; i++) {
-    var journalEntry = renderObject(data.entries[i]);
-    ulList.appendChild(journalEntry);
-  }
-});
-
 var $entriesButton = document.querySelector('.navbar-button');
-var $hideNewEntry = document.querySelector('.entry-form', '.hidden');
+var $hideNewEntry = document.querySelector('.entry-form', '.hidden', '.view');
 var $hideEntries = document.querySelector('.entries', '.hidden');
 var $newButton = document.querySelector('.a-button');
 var $showNewEntry = document.querySelector('.entry-form');
 var $showEntries = document.querySelector('.entries');
-var $saveButton = document.querySelector('#entry-form');
 var $hideNoEntries = document.querySelector('.no-entries', '.hidden');
 var $noEntries = document.querySelector('.no-entries');
 
 $entriesButton.addEventListener('click', function (e) {
   e.preventDefault();
-  if (data.entries.length === 0) {
-    $hideNoEntries.className.className = 'no-entries';
-    $showNewEntry.className = 'entry-form hidden';
-    $hideEntries.className = 'entries';
-  } else if (data.entries.length > 0) {
-    $noEntries.className = 'no-entries hidden';
-    $hideEntries.className = 'entries';
-    $showNewEntry.className = 'entry-form hidden';
-  }
-}
-);
+  viewSwap('entries');
+});
 
 $newButton.addEventListener('click', function (e) {
   e.preventDefault();
-  $hideNewEntry.className = 'entry-form';
-  $showEntries.className = 'entries hidden';
-  viewSwap(data.view);
-});
-
-$saveButton.addEventListener('submit', function (e) {
-  e.preventDefault();
-  var ulList = document.querySelector('ul');
-  var newJournalEntry = renderObject(data.entries[0]);
-  ulList.prepend(newJournalEntry);
-  $hideEntries.className = 'entries';
-  $showNewEntry.className = 'hidden';
-  $noEntries.className = 'no-entries hidden';
+  viewSwap('entry-form');
 });
 
 function viewSwap(dataView) {
-  var $viewList = document.querySelectorAll('.view');
   data.view = dataView;
-  for (var i = 0; i < $viewList.length; i++) {
-    if ($viewList[i].getAttribute('data-view') === dataView) {
-      $viewList[i].classList.remove('hidden');
-    } else {
-      $viewList[i].classList.add('hidden');
+  if (dataView === 'entry-form') {
+    $showEntries.className = 'entries hidden';
+    $hideNewEntry.className = 'entry-form view';
+    $noEntries.className = 'no-entries hidden';
+  } else if (dataView === 'entries') {
+    if (data.entries.length === 0) {
+      $hideNoEntries.className = 'no-entries';
+      $showNewEntry.className = 'entry-form hidden';
+      $hideEntries.className = 'entries';
+    } else if (data.entries.length > 0) {
+      $noEntries.className = 'no-entries hidden';
+      $hideEntries.className = 'entries';
+      $showNewEntry.className = 'entry-form hidden';
     }
   }
 }
@@ -122,6 +103,5 @@ document.addEventListener('DOMContentLoaded', function (e) {
     var journalEntry = renderObject(data.entries[i]);
     ulList.appendChild(journalEntry);
   }
-  var $dataView = data.view;
-  viewSwap($dataView);
+  viewSwap(data.view);
 });
