@@ -70,17 +70,28 @@ var $newButton = document.querySelector('.a-button');
 var $showNewEntry = document.querySelector('.entry-form');
 var $showEntries = document.querySelector('.entries');
 var $saveButton = document.querySelector('#entry-form');
+var $hideNoEntries = document.querySelector('.no-entries', '.hidden');
+var $noEntries = document.querySelector('.no-entries');
 
 $entriesButton.addEventListener('click', function (e) {
   e.preventDefault();
-  $hideEntries.className = 'entries';
-  $showNewEntry.className = 'entry-form hidden';
-});
+  if (data.entries.length === 0) {
+    $hideNoEntries.className.className = 'no-entries';
+    $showNewEntry.className = 'entry-form hidden';
+    $hideEntries.className = 'entries';
+  } else if (data.entries.length > 0) {
+    $noEntries.className = 'no-entries hidden';
+    $hideEntries.className = 'entries';
+    $showNewEntry.className = 'entry-form hidden';
+  }
+}
+);
 
 $newButton.addEventListener('click', function (e) {
   e.preventDefault();
   $hideNewEntry.className = 'entry-form';
   $showEntries.className = 'entries hidden';
+  viewSwap(data.view);
 });
 
 $saveButton.addEventListener('submit', function (e) {
@@ -90,4 +101,27 @@ $saveButton.addEventListener('submit', function (e) {
   ulList.prepend(newJournalEntry);
   $hideEntries.className = 'entries';
   $showNewEntry.className = 'hidden';
+  $noEntries.className = 'no-entries hidden';
+});
+
+function viewSwap(dataView) {
+  var $viewList = document.querySelectorAll('.view');
+  data.view = dataView;
+  for (var i = 0; i < $viewList.length; i++) {
+    if ($viewList[i].getAttribute('data-view') === dataView) {
+      $viewList[i].classList.remove('hidden');
+    } else {
+      $viewList[i].classList.add('hidden');
+    }
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function (e) {
+  var ulList = document.querySelector('ul');
+  for (var i = 0; i < data.entries.length; i++) {
+    var journalEntry = renderObject(data.entries[i]);
+    ulList.appendChild(journalEntry);
+  }
+  var $dataView = data.view;
+  viewSwap($dataView);
 });

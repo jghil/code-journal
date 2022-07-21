@@ -60,6 +60,12 @@ a:hover {
   cursor: pointer;
 }
 
+.no-entries {
+  font-weight: 200;
+  text-align: center;
+  margin-top: 5rem;
+}
+
 .button {
   background-color: rgb(75, 35, 115);
   color: white;
