@@ -10,6 +10,18 @@
 
 .navbar {
   max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.navbar-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+
+.navbar-items {
+  margin-right: 1rem;
 }
 
 .row {
@@ -26,18 +38,42 @@
   margin-top: 1rem;
 }
 
+.save-button {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.new-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
 .column-full,
 .column-half {
   width: 100%;
 }
 
+.no-bullets {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.li-space {
+  margin: 0 0 2rem;
+}
+
 @media screen and (min-width: 768px) {
-  .container {
-    max-width: 900px;
+  .container,
+  .navbar {
+    max-width: 1200px;
   }
 
   .column-full,
-  .column-half {
+  .column-half,
+  .navbar-links {
     padding: 0 0.75rem;
   }
 

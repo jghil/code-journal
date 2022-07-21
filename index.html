@@ -17,16 +17,21 @@
 </head>
 <body>
   <header>
-    <div class="container navbar">
+    <div class="navbar">
       <div class="row">
-        <div class="column-full">
-          <h2>Code Journal</h2>
+        <div class="navbar-links">
+          <div class="navbar-items">
+            <h2>Code Journal</h2>
+          </div>
+          <div class="navbar-items smaller-font">
+            <h2><a href="#entries" class="navbar-button">Entries</a></h2>
+          </div>
         </div>
       </div>
     </div>
   </header>
   <main>
-    <div data-view="entry-form">
+    <div data-view="entry-form" class="entry-form view">
       <form action="index.html" method="get" id="entry-form">
         <div class="container">
           <div class="row">
@@ -76,12 +81,24 @@
             </div>
           </div>
           <div class="row">
-            <div class="column-full button">
-              <button type="submit" class="save-button">SAVE</button>
+            <div class="column-full save-button">
+              <button type="submit" id="new-entry-button" class="button">SAVE</button>
             </div>
           </div>
         </div>
       </form>
+    </div>
+    <div data-view="entries" id="entries" class="entries hidden view">
+      <div class="container">
+        <div class="row">
+          <div class="column-full new-button">
+            <h1>Entries</h1>
+            <a href="#entry-form" class="a-button">NEW</a>
+          </div>
+        </div>
+        <h3 class="no-entries">No entries have been recorded.</h3>
+        <ul class="no-bullets"></ul>
+      </div>
     </div>
   </main>
   <script src="js/data.js"></script>
