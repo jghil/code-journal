@@ -26,6 +26,7 @@ function renderObject(data) {
   var liWrapper = document.createElement('li');
   liWrapper.setAttribute('class', 'no-bullets');
   liWrapper.setAttribute('class', 'li-space');
+  liWrapper.setAttribute('data-entry-id', data.entryId);
 
   var divRow = document.createElement('div');
   divRow.setAttribute('class', 'row');
@@ -40,25 +41,51 @@ function renderObject(data) {
   var columnHalfTwo = document.createElement('div');
   columnHalfTwo.setAttribute('class', 'column-half');
 
+  var columnEdit = document.createElement('div');
+  columnEdit.setAttribute('class', 'column-edit no-padding new-button');
+
+  var editRow = document.createElement('div');
+  editRow.setAttribute('class', 'row');
+
   var entryTitle = document.createElement('h2');
   entryTitle.setAttribute('class', 'no-margin');
   entryTitle.textContent = data.title;
+
+  var editIcon = document.createElement('i');
+  editIcon.setAttribute('class', 'fa-solid fa-pen');
+  // <i class="fa-solid fa-pen"></i>
 
   var entryContent = document.createElement('p');
   entryContent.setAttribute('class', 'no-margin');
 
   entryContent.textContent = data.notes;
-
+  // <li class="no-bullets li-space">
+  //  <div class="row">
+  //    <div class="column-half">
+  //      <imgTag src="data.photoUrl" class="images">
+  //    </div>
+  //   <div class="columnHalfTwo">
+  //     <div class="row">
+  //       <div class="column-nine">
+  //          <h2 class="no-margin"></h2>
+  //       </div>
+  //       <div class="column-one">
+  //         <i class="fa-solid fa-pen"></i>
+  //     </div>
+  //     <p class="no-margin">
   liWrapper.appendChild(divRow);
   divRow.appendChild(columnHalf);
   columnHalf.appendChild(imgTag);
   divRow.appendChild(columnHalfTwo);
-  columnHalfTwo.appendChild(entryTitle);
+  columnHalfTwo.appendChild(editRow);
+  editRow.appendChild(columnEdit);
+  columnEdit.appendChild(entryTitle);
+  columnEdit.appendChild(editIcon);
   columnHalfTwo.appendChild(entryContent);
 
   return liWrapper;
-}
 
+}
 var $entriesButton = document.querySelector('.navbar-button');
 var $hideNewEntry = document.querySelector('.entry-form', '.hidden', '.view');
 var $hideEntries = document.querySelector('.entries', '.hidden');
