@@ -51,8 +51,13 @@ function renderObject(data) {
   entryTitle.setAttribute('class', 'no-margin');
   entryTitle.textContent = data.title;
 
+  var editIconAnchor = document.createElement('a');
+  editIconAnchor.setAttribute('href', '#entry-form');
+  editIconAnchor.setAttribute('class', 'edit-icon');
+
   var editIcon = document.createElement('i');
   editIcon.setAttribute('class', 'fa-solid fa-pen');
+  editIcon.setAttribute('data-entryId', data.entryId);
   // <i class="fa-solid fa-pen"></i>
 
   var entryContent = document.createElement('p');
@@ -70,7 +75,7 @@ function renderObject(data) {
   //          <h2 class="no-margin"></h2>
   //       </div>
   //       <div class="column-one">
-  //         <i class="fa-solid fa-pen"></i>
+  //         <i class="fa-solid fa-pen"><a href="#entry-form" class="edit-icon"></a></i>
   //     </div>
   //     <p class="no-margin">
   liWrapper.appendChild(divRow);
@@ -80,7 +85,8 @@ function renderObject(data) {
   columnHalfTwo.appendChild(editRow);
   editRow.appendChild(columnEdit);
   columnEdit.appendChild(entryTitle);
-  columnEdit.appendChild(editIcon);
+  columnEdit.appendChild(editIconAnchor);
+  editIconAnchor.appendChild(editIcon);
   columnHalfTwo.appendChild(entryContent);
 
   return liWrapper;
@@ -131,4 +137,10 @@ document.addEventListener('DOMContentLoaded', function (e) {
     ulList.appendChild(journalEntry);
   }
   viewSwap(data.view);
+});
+
+document.getElementById('entry-list').addEventListener('click', function (e) {
+  if (e.target && e.target.nodeName === 'I') {
+    viewSwap('entry-form');
+  }
 });
