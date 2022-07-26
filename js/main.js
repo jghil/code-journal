@@ -141,6 +141,13 @@ document.addEventListener('DOMContentLoaded', function (e) {
 
 document.getElementById('entry-list').addEventListener('click', function (e) {
   if (e.target && e.target.nodeName === 'I') {
-    viewSwap('entry-form');
+    var $closestLi = e.target.closest('li');
+    var $closestLiId = $closestLi.getAttribute('data-entry-id');
+    var parsedId = parseInt($closestLiId);
+    for (var i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryId === parsedId);
+      data.editing = data.entries[i];
+      viewSwap('entry-form');
+    }
   }
 });
