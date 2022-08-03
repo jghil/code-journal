@@ -32,6 +32,17 @@ label {
   margin: 0;
 }
 
+i {
+  font-size: 1.5rem;
+  color: rgb(75, 35, 115);
+  opacity: 80%;
+}
+
+i:hover {
+  opacity: 100%;
+  cursor: pointer;
+}
+
 input,
 textarea {
   border-radius: 3px;

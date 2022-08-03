@@ -1,6 +1,7 @@
 var $photoUrlPreview = document.getElementById('placeholderImage');
 var $newPhotoPreview = document.getElementById('photoUrl');
 var $entryForm = document.querySelector('#entry-form');
+var $entryHeader = document.querySelector('.new-entry-title');
 
 $newPhotoPreview.addEventListener('input', function (e) {
   $photoUrlPreview.setAttribute('src', e.target.value);
@@ -8,24 +9,46 @@ $newPhotoPreview.addEventListener('input', function (e) {
 
 $entryForm.addEventListener('submit', function (e) {
   e.preventDefault();
-  var newObject = {};
-  newObject.entryId = data.nextEntryId++;
-  newObject.title = $entryForm.elements.title.value;
-  newObject.photoUrl = $entryForm.elements.photoUrl.value;
-  newObject.notes = $entryForm.elements.notes.value;
+  if (data.editing === null) {
+    var newObject = {};
+    newObject.entryId = data.nextEntryId++;
+    newObject.title = $entryForm.elements.title.value;
+    newObject.photoUrl = $entryForm.elements.photoUrl.value;
+    newObject.notes = $entryForm.elements.notes.value;
+    data.entries.unshift(newObject);
+    var ulList = document.querySelector('ul');
+    var newJournalEntry = renderObject(data.entries[0]);
+    ulList.prepend(newJournalEntry);
+  } else {
+    var updatedObject = {};
+    updatedObject.title = $entryForm.elements.title.value;
+    updatedObject.photoUrl = $entryForm.elements.photoUrl.value;
+    updatedObject.notes = $entryForm.elements.notes.value;
+    updatedObject.entryId = data.editing.entryId;
+    for (var i = 0; i < data.entries.length; i++) {
+      if (data.editing.entryId === data.entries[i].entryId) {
+        data.entries[i] = updatedObject;
+      }
+    }
+    var $liList = document.querySelectorAll('li');
+    for (var liIndex = 0; liIndex < $liList.length; liIndex++) {
+      if (data.editing.entryId === parseInt($liList[liIndex].getAttribute('data-entry-id'))) {
+        var updatedEntry = renderObject(updatedObject);
+        $liList[liIndex].replaceWith(updatedEntry);
+      }
+    }
+  }
+  $entryHeader.textContent = 'New Entry';
+  viewSwap('entries');
   document.getElementById('entry-form').reset();
   $photoUrlPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
-  data.entries.unshift(newObject);
-  var ulList = document.querySelector('ul');
-  var newJournalEntry = renderObject(data.entries[0]);
-  ulList.prepend(newJournalEntry);
-  viewSwap('entries');
 });
 
 function renderObject(data) {
   var liWrapper = document.createElement('li');
   liWrapper.setAttribute('class', 'no-bullets');
   liWrapper.setAttribute('class', 'li-space');
+  liWrapper.setAttribute('data-entry-id', data.entryId);
 
   var divRow = document.createElement('div');
   divRow.setAttribute('class', 'row');
@@ -40,25 +63,57 @@ function renderObject(data) {
   var columnHalfTwo = document.createElement('div');
   columnHalfTwo.setAttribute('class', 'column-half');
 
+  var columnEdit = document.createElement('div');
+  columnEdit.setAttribute('class', 'column-edit no-padding new-button');
+
+  var editRow = document.createElement('div');
+  editRow.setAttribute('class', 'row');
+
   var entryTitle = document.createElement('h2');
   entryTitle.setAttribute('class', 'no-margin');
   entryTitle.textContent = data.title;
+
+  var editIconAnchor = document.createElement('a');
+  editIconAnchor.setAttribute('href', '#entry-form');
+  editIconAnchor.setAttribute('class', 'edit-icon');
+
+  var editIcon = document.createElement('i');
+  editIcon.setAttribute('class', 'fa-solid fa-pen');
+  editIcon.setAttribute('data-entryId', data.entryId);
+  // <i class="fa-solid fa-pen"></i>
 
   var entryContent = document.createElement('p');
   entryContent.setAttribute('class', 'no-margin');
 
   entryContent.textContent = data.notes;
-
+  // <li class="no-bullets li-space">
+  //  <div class="row">
+  //    <div class="column-half">
+  //      <imgTag src="data.photoUrl" class="images">
+  //    </div>
+  //   <div class="columnHalfTwo">
+  //     <div class="row">
+  //       <div class="column-nine">
+  //          <h2 class="no-margin"></h2>
+  //       </div>
+  //       <div class="column-one">
+  //         <i class="fa-solid fa-pen"><a href="#entry-form" class="edit-icon"></a></i>
+  //     </div>
+  //     <p class="no-margin">
   liWrapper.appendChild(divRow);
   divRow.appendChild(columnHalf);
   columnHalf.appendChild(imgTag);
   divRow.appendChild(columnHalfTwo);
-  columnHalfTwo.appendChild(entryTitle);
+  columnHalfTwo.appendChild(editRow);
+  editRow.appendChild(columnEdit);
+  columnEdit.appendChild(entryTitle);
+  columnEdit.appendChild(editIconAnchor);
+  editIconAnchor.appendChild(editIcon);
   columnHalfTwo.appendChild(entryContent);
 
   return liWrapper;
-}
 
+}
 var $entriesButton = document.querySelector('.navbar-button');
 var $hideNewEntry = document.querySelector('.entry-form', '.hidden', '.view');
 var $hideEntries = document.querySelector('.entries', '.hidden');
@@ -75,6 +130,7 @@ $entriesButton.addEventListener('click', function (e) {
 
 $newButton.addEventListener('click', function (e) {
   e.preventDefault();
+  $entryHeader.textContent = 'New Entry';
   viewSwap('entry-form');
 });
 
@@ -104,4 +160,22 @@ document.addEventListener('DOMContentLoaded', function (e) {
     ulList.appendChild(journalEntry);
   }
   viewSwap(data.view);
+});
+
+document.getElementById('entry-list').addEventListener('click', function (e) {
+  if (e.target.tagName === 'I') {
+    viewSwap('entry-form');
+    for (var i = 0; i < data.entries.length; i++) {
+      var $closestLi = e.target.closest('li');
+      var $closestLiId = $closestLi.getAttribute('data-entry-id');
+      var parsedId = parseInt($closestLiId);
+      if (parsedId === data.entries[i].entryId) {
+        data.editing = data.entries[i];
+        $entryForm.elements.title.value = data.entries[i].title;
+        $entryForm.elements.photoUrl.value = data.entries[i].photoUrl;
+        $photoUrlPreview.setAttribute('src', $entryForm.elements.photoUrl.value);
+        $entryForm.elements.notes.value = data.entries[i].notes;
+      }
+    } $entryHeader.textContent = 'Edit Entry';
+  }
 });

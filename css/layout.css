@@ -51,7 +51,9 @@
 }
 
 .column-full,
-.column-half {
+.column-half,
+.column-one,
+.column-edit {
   width: 100%;
 }
 
@@ -63,6 +65,10 @@
 
 .li-space {
   margin: 0 0 2rem;
+}
+
+.no-padding {
+  padding: 0;
 }
 
 @media screen and (min-width: 768px) {

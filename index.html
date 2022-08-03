@@ -36,7 +36,8 @@
         <div class="container">
           <div class="row">
             <div class="column-full">
-              <h1>New Entry</h1>
+              <h1 class="new-entry-title">New Entry</h1>
+              <h1 class="edit-entry-title hidden">Edit Entry</h1>
             </div>
           </div>
           <div class="row">
@@ -88,7 +89,7 @@
         </div>
       </form>
     </div>
-    <div data-view="entries" id="entries" class="entries hidden view">
+    <div data-view="entries" id="entries" class="entries view">
       <div class="container">
         <div class="row">
           <div class="column-full new-button">
@@ -97,7 +98,7 @@
           </div>
         </div>
         <h3 class="no-entries">No entries have been recorded.</h3>
-        <ul class="no-bullets"></ul>
+        <ul class="no-bullets" id="entry-list"></ul>
       </div>
     </div>
   </main>
