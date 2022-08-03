@@ -38,15 +38,15 @@
   margin-top: 1rem;
 }
 
-.save-button {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.new-button {
+.space-between {
   display: flex;
   justify-content: space-between;
+  align-items: baseline;
+}
+
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
   align-items: baseline;
 }
 

@@ -101,3 +101,14 @@ a:hover {
   color: white;
   text-decoration: none;
 }
+
+.hidden-button {
+  visibility: hidden;
+}
+
+.delete-button {
+  color: red;
+  text-decoration: underline;
+  border-style: none;
+  text-decoration-skip-ink: none;
+}

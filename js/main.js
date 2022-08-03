@@ -39,6 +39,7 @@ $entryForm.addEventListener('submit', function (e) {
     }
   }
   $entryHeader.textContent = 'New Entry';
+  $deleteButtonHidden.className = 'hidden-button delete-button';
   viewSwap('entries');
   document.getElementById('entry-form').reset();
   $photoUrlPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
@@ -64,7 +65,7 @@ function renderObject(data) {
   columnHalfTwo.setAttribute('class', 'column-half');
 
   var columnEdit = document.createElement('div');
-  columnEdit.setAttribute('class', 'column-edit no-padding new-button');
+  columnEdit.setAttribute('class', 'column-edit no-padding space-between');
 
   var editRow = document.createElement('div');
   editRow.setAttribute('class', 'row');
@@ -122,6 +123,7 @@ var $showNewEntry = document.querySelector('.entry-form');
 var $showEntries = document.querySelector('.entries');
 var $hideNoEntries = document.querySelector('.no-entries', '.hidden');
 var $noEntries = document.querySelector('.no-entries');
+var $deleteButtonHidden = document.querySelector('#delete-button', '.delete-hidden');
 
 $entriesButton.addEventListener('click', function (e) {
   e.preventDefault();
@@ -176,6 +178,8 @@ document.getElementById('entry-list').addEventListener('click', function (e) {
         $photoUrlPreview.setAttribute('src', $entryForm.elements.photoUrl.value);
         $entryForm.elements.notes.value = data.entries[i].notes;
       }
-    } $entryHeader.textContent = 'Edit Entry';
+    }
+    $deleteButtonHidden.className = 'delete-button';
+    $entryHeader.textContent = 'Edit Entry';
   }
 });
