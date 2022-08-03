@@ -30,6 +30,13 @@ $entryForm.addEventListener('submit', function (e) {
         data.entries[i] = updatedObject;
       }
     }
+    var $liList = document.querySelectorAll('li');
+    for (var liIndex = 0; liIndex < $liList.length; liIndex++) {
+      if (data.editing.entryId === parseInt($liList[liIndex].getAttribute('data-entry-id'))) {
+        var updatedEntry = renderObject(updatedObject);
+        $liList[liIndex].replaceWith(updatedEntry);
+      }
+    }
   }
   $entryHeader.textContent = 'New Entry';
   viewSwap('entries');
