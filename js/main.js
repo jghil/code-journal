@@ -2,6 +2,21 @@ var $photoUrlPreview = document.getElementById('placeholderImage');
 var $newPhotoPreview = document.getElementById('photoUrl');
 var $entryForm = document.querySelector('#entry-form');
 var $entryHeader = document.querySelector('.new-entry-title');
+var $entriesButton = document.querySelector('.navbar-button');
+var $hideNewEntry = document.querySelector('.entry-form', '.hidden', '.view');
+var $hideEntries = document.querySelector('.entries', '.hidden');
+var $newButton = document.querySelector('.a-button');
+var $showNewEntry = document.querySelector('.entry-form');
+var $showEntries = document.querySelector('.entries');
+var $hideNoEntries = document.querySelector('.no-entries', '.hidden');
+var $noEntries = document.querySelector('.no-entries');
+var $deleteButtonHidden = document.querySelector('#delete-button', '.delete-hidden');
+var $deleteButton = document.querySelector('#delete-button');
+var $modalHidden = document.querySelector('.modal-container', '.hidden');
+var $modal = document.querySelector('.modal-container');
+var $cancelButton = document.querySelector('.cancel-button');
+var $modalOverlay = document.querySelector('.modal-overlay');
+var $modalOverlayHidden = document.querySelector('.modal-overlay', '.hidden');
 
 $newPhotoPreview.addEventListener('input', function (e) {
   $photoUrlPreview.setAttribute('src', e.target.value);
@@ -87,20 +102,7 @@ function renderObject(data) {
   entryContent.setAttribute('class', 'no-margin');
 
   entryContent.textContent = data.notes;
-  // <li class="no-bullets li-space">
-  //  <div class="row">
-  //    <div class="column-half">
-  //      <imgTag src="data.photoUrl" class="images">
-  //    </div>
-  //   <div class="columnHalfTwo">
-  //     <div class="row">
-  //       <div class="column-nine">
-  //          <h2 class="no-margin"></h2>
-  //       </div>
-  //       <div class="column-one">
-  //         <i class="fa-solid fa-pen"><a href="#entry-form" class="edit-icon"></a></i>
-  //     </div>
-  //     <p class="no-margin">
+
   liWrapper.appendChild(divRow);
   divRow.appendChild(columnHalf);
   columnHalf.appendChild(imgTag);
@@ -115,15 +117,6 @@ function renderObject(data) {
   return liWrapper;
 
 }
-var $entriesButton = document.querySelector('.navbar-button');
-var $hideNewEntry = document.querySelector('.entry-form', '.hidden', '.view');
-var $hideEntries = document.querySelector('.entries', '.hidden');
-var $newButton = document.querySelector('.a-button');
-var $showNewEntry = document.querySelector('.entry-form');
-var $showEntries = document.querySelector('.entries');
-var $hideNoEntries = document.querySelector('.no-entries', '.hidden');
-var $noEntries = document.querySelector('.no-entries');
-var $deleteButtonHidden = document.querySelector('#delete-button', '.delete-hidden');
 
 $entriesButton.addEventListener('click', function (e) {
   e.preventDefault();
@@ -136,12 +129,27 @@ $newButton.addEventListener('click', function (e) {
   viewSwap('entry-form');
 });
 
+$deleteButton.addEventListener('click', function (e) {
+  e.preventDefault();
+  $modalHidden.className = 'modal-container';
+  $modalOverlayHidden.className = 'modal-overlay';
+});
+
+$cancelButton.addEventListener('click', function (e) {
+  e.preventDefault();
+  $modal.className = 'modal-container hidden';
+  $modalOverlay.className = 'modal-overlay hidden';
+
+});
 function viewSwap(dataView) {
   data.view = dataView;
   if (dataView === 'entry-form') {
     $showEntries.className = 'entries hidden';
     $hideNewEntry.className = 'entry-form view';
     $noEntries.className = 'no-entries hidden';
+    $deleteButtonHidden.className = 'hidden-button delete-button';
+    document.getElementById('entry-form').reset();
+    $photoUrlPreview.setAttribute('src', 'images/placeholder-image-square.jpg');
   } else if (dataView === 'entries') {
     if (data.entries.length === 0) {
       $hideNoEntries.className = 'no-entries';

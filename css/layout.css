@@ -34,7 +34,7 @@
   width: 100%;
 }
 
-.wrapped {
+.margin-top {
   margin-top: 1rem;
 }
 
@@ -50,9 +50,12 @@
   align-items: baseline;
 }
 
+.align-center {
+  align-items: center;
+}
+
 .column-full,
 .column-half,
-.column-one,
 .column-edit {
   width: 100%;
 }
@@ -69,6 +72,23 @@
 
 .no-padding {
   padding: 0;
+}
+
+.modal-container {
+  width: 400px;
+  background-color: white;
+  border-radius: 5px;
+  margin: auto;
+  padding: 1rem;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: rgba(60, 64, 67, 0.3) 0 1px 5px 0;
+}
+
+.margin-auto {
+  margin: 1rem 0;
 }
 
 @media screen and (min-width: 768px) {
