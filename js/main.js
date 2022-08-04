@@ -17,6 +17,7 @@ var $modal = document.querySelector('.modal-container');
 var $cancelButton = document.querySelector('.cancel-button');
 var $modalOverlay = document.querySelector('.modal-overlay');
 var $modalOverlayHidden = document.querySelector('.modal-overlay', '.hidden');
+var $confirmDelete = document.querySelector('.confirm-button');
 
 $newPhotoPreview.addEventListener('input', function (e) {
   $photoUrlPreview.setAttribute('src', e.target.value);
@@ -52,6 +53,7 @@ $entryForm.addEventListener('submit', function (e) {
         $liList[liIndex].replaceWith(updatedEntry);
       }
     }
+    data.editing = null;
   }
   $entryHeader.textContent = 'New Entry';
   $deleteButtonHidden.className = 'hidden-button delete-button';
@@ -96,7 +98,6 @@ function renderObject(data) {
   var editIcon = document.createElement('i');
   editIcon.setAttribute('class', 'fa-solid fa-pen');
   editIcon.setAttribute('data-entryId', data.entryId);
-  // <i class="fa-solid fa-pen"></i>
 
   var entryContent = document.createElement('p');
   entryContent.setAttribute('class', 'no-margin');
@@ -139,8 +140,8 @@ $cancelButton.addEventListener('click', function (e) {
   e.preventDefault();
   $modal.className = 'modal-container hidden';
   $modalOverlay.className = 'modal-overlay hidden';
-
 });
+
 function viewSwap(dataView) {
   data.view = dataView;
   if (dataView === 'entry-form') {
@@ -190,4 +191,19 @@ document.getElementById('entry-list').addEventListener('click', function (e) {
     $deleteButtonHidden.className = 'delete-button';
     $entryHeader.textContent = 'Edit Entry';
   }
+});
+
+$confirmDelete.addEventListener('click', function (e) {
+  for (var entry = 0; entry < data.entries.length; entry++) {
+    if (data.editing.entryId === data.entries[entry].entryId) {
+      data.entries.splice(entry, 1);
+    }
+  }
+  var $liList = document.querySelectorAll('li');
+  for (var liIndex = 0; liIndex < $liList.length; liIndex++) {
+    if (data.editing.entryId === parseInt($liList[liIndex].getAttribute('data-entry-id'))) {
+      $liList[liIndex].remove();
+    }
+  } $modal.className = 'modal-container hidden';
+  $modalOverlay.className = 'modal-overlay hidden';
 });
