@@ -14,6 +14,10 @@ header {
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, sans-serif;
 }
 
+.text-align-center {
+  text-align: center;
+}
+
 label {
   font-size: 1rem;
   font-weight: bold;
@@ -100,4 +104,42 @@ a:hover {
 .navbar-button {
   color: white;
   text-decoration: none;
+}
+
+.hidden-button {
+  visibility: hidden;
+}
+
+.delete-button {
+  color: red;
+  text-decoration: underline;
+  border-style: none;
+  text-decoration-skip-ink: none;
+}
+
+.cancel-button {
+  background-color: #b6b6b6;
+  border-style: none;
+  border-radius: 5px;
+  padding: 7px 10px;
+  font-weight: 600;
+}
+
+.confirm-button {
+  background-color: #dc2626;
+  border-style: none;
+  border-radius: 5px;
+  padding: 7px 10px;
+  font-weight: 400;
+  color: white;
+}
+
+.modal-overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  transform: scale(1.1);
 }

@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+  <div class="modal-overlay hidden"></div>
   <header>
     <div class="navbar">
       <div class="row">
@@ -45,8 +46,8 @@
               <img src="images/placeholder-image-square.jpg" class="images" alt="placeholder image" id="placeholderImage">
             </div>
             <div class="column-half">
-              <div class="wrapped">
-                <label for="title" class="margin-top">Title</label>
+              <div class="margin-top">
+                <label for="title">Title</label>
                 <div>
                   <input
                   required
@@ -55,8 +56,8 @@
                   id="title">
                 </div>
               </div>
-              <div class="wrapped">
-                <label for="photoUrl" class="margin-top">Photo URL</label>
+              <div class="margin-top">
+                <label for="photoUrl">Photo URL</label>
                 <div>
                   <input
                   required
@@ -69,8 +70,8 @@
           </div>
           <div class="row">
             <div class="column-full">
-              <div class="wrapped">
-                <label for="notes" class="margin-top">Notes</label>
+              <div class="margin-top">
+                <label for="notes">Notes</label>
                 <div>
                   <textarea
                   required
@@ -82,8 +83,22 @@
             </div>
           </div>
           <div class="row">
-            <div class="column-full save-button">
+            <div class="column-full space-between">
+              <button type="button" id="delete-button" class="hidden-button delete-button">Delete Entry</button>
               <button type="submit" id="new-entry-button" class="button">SAVE</button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-container hidden">
+          <div class="row text-align-center margin-auto">
+            <div class="column-full">
+              <h4>Are you sure you want to delete this entry?</h4>
+            </div>
+          </div>
+          <div class="row margin-top">
+            <div class="column-full space-between margin-top">
+              <button class="cancel-button">CANCEL</button>
+              <button class="confirm-button">CONFIRM</button>
             </div>
           </div>
         </div>
@@ -92,7 +107,7 @@
     <div data-view="entries" id="entries" class="entries view">
       <div class="container">
         <div class="row">
-          <div class="column-full new-button">
+          <div class="column-full space-between">
             <h1>Entries</h1>
             <a href="#entry-form" class="a-button">NEW</a>
           </div>
