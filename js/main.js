@@ -206,4 +206,5 @@ $confirmDelete.addEventListener('click', function (e) {
     }
   } $modal.className = 'modal-container hidden';
   $modalOverlay.className = 'modal-overlay hidden';
+  viewSwap('entries');
 });
